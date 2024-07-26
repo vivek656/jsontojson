@@ -1,0 +1,13 @@
+{
+  "address": {
+    "postCode": "AXBHI",
+    "line1" : "789"
+  },
+  "uprn" : "6789",
+  "owners" : [
+    {
+      "name" : "viv",
+      "type" : "freehold"
+    }
+  ]
+}

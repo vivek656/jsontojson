@@ -1,0 +1,19 @@
+{
+  "mappings": {
+    "/address/postCode": {
+      "pathToMap": "/address_postcode"
+    },
+    "/address/line1": {
+      "pathToMap": "/address_line1"
+    },
+    "/uprn": {
+      "pathToMap": "/uprn"
+    },
+    "/owners/-/name" : {
+      "pathToMap" : "/owner/name"
+    },
+    "/owners/--/type" : {
+      "pathToMap" : "/ownerTypes"
+    }
+  }
+}

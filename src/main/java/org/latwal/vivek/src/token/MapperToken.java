@@ -1,13 +1,13 @@
 package org.latwal.vivek.src.token;
 
-public class MapperToken {
-    private String pathToMap;
+import com.fasterxml.jackson.databind.JsonNode;
 
-    public String getPathToMap() {
-        return pathToMap;
-    }
+public abstract class MapperToken {
+    protected String tokenType;
 
-    public void setPathToMap(String pathToMap) {
-        this.pathToMap = pathToMap;
-    }
+    public abstract JsonNode extractJsonFromInput(JsonNode node);
+
+    public abstract String pathToMap();
 }
+
+

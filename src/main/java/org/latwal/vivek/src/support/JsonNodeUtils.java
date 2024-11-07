@@ -5,30 +5,28 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Objects;
-import java.util.regex.Pattern;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class JsonNodeUtils {
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    public static JsonNode getOrThrow(JsonNode node, String key) throws IllegalAccessException {
+    public static JsonNode getOrThrow(JsonNode node, String key) {
         if (node.has(key)) {
             return node.get(key);
         }
-        throw new IllegalAccessException(String.format("key %s does not exist in the json object", key));
+        throw new IllegalArgumentException(String.format("key %s does not exist in the json object", key));
     }
 
-    public static JsonNode getAtPath(JsonNode node, String path) throws IllegalAccessException {
+    public static JsonNode getAtPath(JsonNode node, String path) {
         if (isASimplePath(path)) return node.at(path);
         if (path.contains("/--/")) {
             String pathBefore = path.substring(0, path.lastIndexOf("/--/"));
-            String pathAfter = path.substring(path.lastIndexOf("/--/") + 3 );
+            String pathAfter = path.substring(path.lastIndexOf("/--/") + 3);
             JsonNode nodeBefore = node.at(pathBefore);
             if (!nodeBefore.isArray()) {
-                throw new IllegalAccessException(String.format("path %s is not an array", path));
+                throw new IllegalArgumentException(String.format("path %s is not an array", path));
             }
             ArrayNode arrayBefore = (ArrayNode) nodeBefore;
             ArrayNode resultantArray = mapper.createArrayNode();
@@ -42,7 +40,7 @@ public class JsonNodeUtils {
             String pathAfter = path.substring(path.lastIndexOf("/-/") + 2);
             JsonNode nodeBefore = node.at(pathBefore);
             if (!nodeBefore.isArray()) {
-                throw new IllegalAccessException(String.format("path %s is not an array", path));
+                throw new IllegalArgumentException(String.format("path %s is not an array", path));
             }
             ArrayNode arrayBefore = (ArrayNode) nodeBefore;
             if (arrayBefore.isEmpty()) return mapper.missingNode();
@@ -61,7 +59,7 @@ public class JsonNodeUtils {
             JsonNode value
     ) {
         String parentPath = jsonPath.substring(0, jsonPath.lastIndexOf("/"));
-        String child = jsonPath.substring(jsonPath.lastIndexOf("/")+1);
+        String child = jsonPath.substring(jsonPath.lastIndexOf("/") + 1);
         String[] paths = parentPath.split("/");
         ObjectNode currentNode = node;
         if (paths.length != 1) {
@@ -71,5 +69,23 @@ public class JsonNodeUtils {
             }
         }
         currentNode.set(child, value);
+    }
+
+    public static boolean containsPath(JsonNode node, String key) {
+        JsonNode nodeAtPath = node.at(key);
+        return nodeAtPath != null && !nodeAtPath.isMissingNode();
+    }
+
+    public static Map<String,JsonNode> keyValueMap(JsonNode node) {
+        Map<String,JsonNode> map = new HashMap<>();
+        if(node.isObject()) {
+            node.properties().forEach(entry -> map.put(entry.getKey(), entry.getValue()));
+        } else if (node.isArray()) {
+            AtomicInteger counter = new AtomicInteger();
+            node.elements().forEachRemaining(json ->
+                    map.put(String.valueOf(counter.getAndIncrement()) , json)
+            );
+        }
+        return map;
     }
 }

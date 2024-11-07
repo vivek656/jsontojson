@@ -23,12 +23,10 @@ public class JsonMapperTests {
         String mapperString = getStringFromPath("jsons/mapper.json");
         String output = mapper.mapJson(inputString, mapperString);
         JsonNode node = objectMapper.readTree(output);
-
     }
 
     private String getStringFromPath(String path) throws IOException {
         URL resourceAsStream = getClass().getClassLoader().getResource(path);
-        StringBuilder build = new StringBuilder();
         assert resourceAsStream != null;
         return objectMapper.convertValue(objectMapper.readTree(resourceAsStream) , ObjectNode.class).toString();
     }

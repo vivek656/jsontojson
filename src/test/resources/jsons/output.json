@@ -1,11 +1,12 @@
 {
-  "address_postcode" : "AXBh1",
-  "address_line1" : "789",
-  "uprn" : "6789",
   "owner" : {
     "name" : "viv"
   },
-  "ownerTypes" : [
-    "freehold"
-  ]
+  "uprn" : "6789",
+  "address_line1" : "789",
+  "address_postcode" : "AXBHI",
+  "ownerTypes" : [ "freehold" ],
+  "name" : {
+    "full_name" : "vivek singh jacob"
+  }
 }

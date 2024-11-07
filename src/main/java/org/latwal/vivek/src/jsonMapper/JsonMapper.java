@@ -9,8 +9,6 @@ import org.latwal.vivek.src.parser.MapperParser;
 import org.latwal.vivek.src.support.JsonNodeUtils;
 import org.latwal.vivek.src.token.JsonMapperInputToken;
 
-import java.util.Map;
-
 public class JsonMapper {
 
     private final MapperParser parser = new MapperParser();
@@ -20,23 +18,18 @@ public class JsonMapper {
         JsonNode inputNode = objectMapper.readValue(inputJson, ObjectNode.class);
         MappingContext mappingContext = parser.parseJsonToContext(mapperJson);
         ObjectNode resultantNode = objectMapper.createObjectNode();
-
-        for (Map.Entry<String, JsonMapperInputToken> entry : mappingContext.getMappings().entrySet()) {
-            String key = entry.getKey();
-            JsonMapperInputToken value = entry.getValue();
-            addKey(resultantNode, inputNode, key, value);
+        for (JsonMapperInputToken token : mappingContext.getMappings()) {
+            addKey(resultantNode,inputNode,token);
         }
-
         return objectMapper.writeValueAsString(resultantNode);
     }
 
     private void addKey(
             ObjectNode node,
             JsonNode inputJson,
-            String key,
             JsonMapperInputToken token
-    ) throws IllegalAccessException {
-        JsonNode valueInInput = JsonNodeUtils.getAtPath(inputJson, key);
-        JsonNodeUtils.setValueToNode(node, token.getMapperToken().getPathToMap(), valueInInput);
+    ) {
+        JsonNode valueInInput = token.getTokenMapper().extractJsonFromInput(inputJson);
+        JsonNodeUtils.setValueToNode(node, token.getTokenMapper().pathToMap() ,  valueInInput);
     }
 }

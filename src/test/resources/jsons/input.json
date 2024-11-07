@@ -9,5 +9,10 @@
       "name" : "viv",
       "type" : "freehold"
     }
-  ]
+  ],
+  "name" : {
+    "fn" : "vivek",
+    "ln": "jacob",
+    "mn": "singh"
+  }
 }

@@ -94,7 +94,7 @@ We can match array item by index (zero indexed)
 like `/owners/0/name` this means match key traversal like this
  ``. -> owners -> 0th element -> name``
 
-** Matching All array Items **
+**Matching All array Items**
 
 We can tell the parser that inside each array element grab one key and convert to a new array using `--`
 e.g.``/owners/--/type`` we are saying maps each type field inside each array item in owners

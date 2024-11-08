@@ -108,15 +108,16 @@ When we apply mapper.json to input.json we get output like this
 
 ```json
 {
-  "address_postcode" : "AXBh1",
-  "address_line1" : "789",
-  "uprn" : "6789",
+  "name" : {
+    "full_name" : "VIVEK singh jacob"
+  },
+  "address_postcode" : "AXBHI",
   "owner" : {
     "name" : "viv"
   },
-  "ownerTypes" : [
-    "freehold"
-  ]
+  "address_line1" : "789",
+  "uprn" : "6789",
+  "ownerTypes" : [ "freehold" ]
 }
 ```
 ### Keys Rules

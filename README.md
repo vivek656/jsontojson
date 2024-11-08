@@ -1,12 +1,12 @@
-This is a library that will help you map Json to Another JSON.
+This is a library that will help you map one JSON to another JSON. <Br>
 Many times in our code we map one rest Api out put to our data class, which is basically mapping from one JSON to another. 
-
+<br>
 Errors happen during these mappings,
-and sometimes the mappings are very obvious still we need to add those codes transforming one json to another.
+and sometimes the mappings are obvious still we need to add those codes transforming one JSON to another.<br>
 This library tries to externalize these JSON to JSON mapping.
-Where you provide the input to output mappings in a JSON file and library will contract outJson from input JSON from the mapping json.
+Where you provide the input to output mappings in a JSON file and library will create outJson from input JSON using the mapping json.
 
-It may feel that code is being transferred from classes to JsonMapper.
+It may feel that code is being transferred from classes to JsonMapper.<br>
 That's somewhat true, but many advantages of this approach is
 1. duplication of logic is now avoided. e.g., get from x, set in y etc.
 2. declaring mappings beforehand makes the code more readable. making all mappings at single place.

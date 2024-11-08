@@ -6,13 +6,17 @@ import java.util.Objects;
 
 public class JsonMapperInputTokenComplex extends JsonMapperInputToken {
 
-    public JsonMapperInputTokenComplex(String tokenType) {
-        this.type = tokenType;
+    public JsonMapperInputTokenComplex(
+            String tokenType ,
+            String pathToMap
+    ) {
+        super(tokenType, pathToMap);
     }
 
+
     public void setTokenMapperDataFromMappingInfo(JsonNode mapping) {
-        if (Objects.equals(type, "function")) {
+        if (Objects.equals(operationType, "function")) {
             this.tokenMapper = new FunctionalTokenMapperData(mapping);
-        } else throw new IllegalArgumentException(String.format("Type %s not supported", type));
+        } else throw new IllegalArgumentException(String.format("Type %s not supported", operationType));
     }
 }

@@ -43,10 +43,10 @@ public class MapperParser {
     JsonMapperInputTokenSimple getSimpleInputMapperToken(String key , JsonNode node) {
         try {
             String pathToMap = JsonNodeUtils.getOrThrow(node, "pathToMap").textValue();
-            JsonMapperInputTokenSimple tokenInput = new JsonMapperInputTokenSimple();
-            SimpleMapperToken token = new SimpleMapperToken();
-            token.setPathToMap(pathToMap);
-            token.setInputPath(key);
+            JsonMapperInputTokenSimple tokenInput = new JsonMapperInputTokenSimple(pathToMap);
+            PathToken token = new PathToken(
+                    key, node
+            );
             tokenInput.setMapperToken(token);
             return tokenInput;
         } catch (Exception e) {
@@ -57,8 +57,9 @@ public class MapperParser {
 
     JsonMapperInputTokenComplex getComplexInputMapperToken(JsonNode node) {
         try {
-           String type = JsonNodeUtils.getOrThrow(node, "type").textValue();
-           JsonMapperInputTokenComplex token = new JsonMapperInputTokenComplex(type);
+           String type = JsonNodeUtils.getOrThrow(node, "operationType").textValue();
+           String pathToMap = JsonNodeUtils.getOrThrow(node, "pathToMap").textValue();
+           JsonMapperInputTokenComplex token = new JsonMapperInputTokenComplex(type,pathToMap);
            token.setTokenMapperDataFromMappingInfo(node);
            return token;
         } catch (Exception e) {

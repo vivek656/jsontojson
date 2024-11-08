@@ -1,12 +1,19 @@
 package org.latwal.vivek.src.token;
 
-public abstract class JsonMapperInputToken{
-    protected String type;
+public class JsonMapperInputToken{
+    protected String operationType;
+    protected String pathToMap;
     protected MapperToken tokenMapper;
 
-    public String getType() {
-        return type;
+    public JsonMapperInputToken(
+            String operationType,
+            String pathToMap
+    ) {
+        this.operationType = operationType;
+        this.pathToMap = pathToMap;
     }
+
+    public String getPathToMap() { return pathToMap; }
 
     public MapperToken getTokenMapper() {
         return tokenMapper;

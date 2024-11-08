@@ -9,28 +9,34 @@
     "/uprn": {
       "pathToMap": "/uprn"
     },
-    "/owners/-/name" : {
-      "pathToMap" : "/owner/name"
+    "/owners/-/name": {
+      "pathToMap": "/owner/name"
     },
-    "/owners/--/type" : {
-      "pathToMap" : "/ownerTypes"
+    "/owners/--/type": {
+      "pathToMap": "/ownerTypes"
     }
   },
-  "mappings_complex" : [
+  "mappings_complex": [
     {
-      "type" : "function",
-      "pathToMap" : "/name/full_name",
-      "mappings" : {
-        "function" : "concat",
-        "function_param" : {
-          "paths" : [
-            "/name/fn",
-            "/name/mn",
-            "/name/ln"
-          ] ,
-          "separator" : " "
+      "operationType": "function",
+      "pathToMap": "/name/full_name",
+      "mapping_spec": {
+        "function_name": "concat",
+        "args": {
+          "values": [
+            {
+              "function_name": "uppercase",
+              "args": {
+                "value": { "path": "/name/fn"}
+              }
+            },
+            { "path": "/name/mn" },
+            { "path": "/name/ln" }
+          ],
+          "separator": " "
         }
       }
     }
   ]
 }
+

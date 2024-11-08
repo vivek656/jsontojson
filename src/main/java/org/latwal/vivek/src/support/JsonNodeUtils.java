@@ -11,6 +11,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class JsonNodeUtils {
 
     private static final ObjectMapper mapper = new ObjectMapper();
+    public static ObjectMapper getMapper() {
+        return  mapper;
+    }
 
     public static JsonNode getOrThrow(JsonNode node, String key) {
         if (node.has(key)) {
@@ -72,8 +75,13 @@ public class JsonNodeUtils {
     }
 
     public static boolean containsPath(JsonNode node, String key) {
-        JsonNode nodeAtPath = node.at(key);
+        JsonNode nodeAtPath = getAtPath(node, key);
         return nodeAtPath != null && !nodeAtPath.isMissingNode();
+    }
+
+    public static JsonNode getAtPathELseThrow(JsonNode node, String key) {
+        if(!containsPath(node, key)) throw new IllegalArgumentException(String.format("key %s does not exist in the json object", key));
+        return getAtPath(node, key);
     }
 
     public static Map<String,JsonNode> keyValueMap(JsonNode node) {
@@ -87,5 +95,9 @@ public class JsonNodeUtils {
             );
         }
         return map;
+    }
+
+    public static ArrayNode combine(List<JsonNode> list) {
+        return mapper.createArrayNode().addAll(list);
     }
 }

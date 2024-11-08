@@ -4,7 +4,7 @@ import org.latwal.vivek.src.token.JsonMapperInputToken;
 
 import java.util.Set;
 
-public class MappingContext {
+public class     MappingContext {
 
     Set<JsonMapperInputToken> mappings;
 

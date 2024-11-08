@@ -3,11 +3,14 @@ package org.latwal.vivek.src.token;
 import com.fasterxml.jackson.databind.JsonNode;
 
 public abstract class MapperToken {
-    protected String tokenType;
 
-    public abstract JsonNode extractJsonFromInput(JsonNode node);
+    protected JsonNode mappingSpecs;
 
-    public abstract String pathToMap();
+    public JsonNode getMappingSpecs() { return mappingSpecs; }
+    public MapperToken(JsonNode mappingSpecs) {
+        this.mappingSpecs = mappingSpecs;
+    }
+
 }
 
 

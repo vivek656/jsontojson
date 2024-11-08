@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class JsonMapperInputTokenSimple extends JsonMapperInputToken {
 
-    public JsonMapperInputTokenSimple() {
-        this.type = "Simple";
+    public JsonMapperInputTokenSimple( String pathToMap) {
+        super("Simple" , pathToMap);
     }
 
     public void setMapperToken(MapperToken mapperToken) {

@@ -18,8 +18,11 @@ public class Evaluator {
         if(mappingIsPathMapping(mappingSpecs)){
             String inputPath = JsonNodeUtils.getAtPathELseThrow(mappingSpecs,"/path").textValue();
             return JsonNodeUtils.getAtPath(inputNode,inputPath);
-        } else if (mappingIsFunctionalMapping(mappingSpecs)) {
+        } else if (mappingIsFunction(mappingSpecs)) {
             return evaluateFunction(mappingSpecs,inputNode);
+        } else if(mappingIfFunctionSpecs(mappingSpecs)){
+            JsonNode functionBody = JsonNodeUtils.getOrThrow(mappingSpecs, "function_body");
+            return evaluateFunction(functionBody, inputNode);
         } else {
             throw new IllegalArgumentException("unsupported mapping specs , cannot successfully extract the type of specs from the json");
         }
@@ -29,8 +32,12 @@ public class Evaluator {
        return mappingSpecs.has("path");
     }
 
-    boolean mappingIsFunctionalMapping(JsonNode mappingSpecs) {
+    boolean mappingIsFunction(JsonNode mappingSpecs) {
         return mappingSpecs.has("function_name");
+    }
+
+    boolean mappingIfFunctionSpecs(JsonNode mappingSpecs) {
+        return mappingSpecs.has("function_body");
     }
 
     JsonNode evaluateFunction(JsonNode functionMappingSpecs , JsonNode inputNode) {

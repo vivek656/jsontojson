@@ -21,19 +21,27 @@
       "operationType": "function",
       "pathToMap": "/name/full_name",
       "mapping_spec": {
-        "function_name": "concat",
-        "args": {
-          "values": [
-            {
-              "function_name": "uppercase",
-              "args": {
-                "value": { "path": "/name/fn"}
+        "function_body": {
+          "function_name": "concat",
+          "args": {
+            "values": [
+              {
+                "function_name": "uppercase",
+                "args": {
+                  "value": {
+                    "path": "/name/fn"
+                  }
+                }
+              },
+              {
+                "path": "/name/mn"
+              },
+              {
+                "path": "/name/ln"
               }
-            },
-            { "path": "/name/mn" },
-            { "path": "/name/ln" }
-          ],
-          "separator": " "
+            ],
+            "separator": " "
+          }
         }
       }
     }

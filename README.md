@@ -48,7 +48,12 @@ Suppose this is Input.json that we want to map to other JSON
       "name" : "viv",
       "type" : "freehold"
     }
-  ]
+  ],
+  "name" : {
+    "fn" : "vivek",
+    "ln": "jacob",
+    "mn": "singh"
+  }
 }
 ```
 

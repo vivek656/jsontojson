@@ -175,7 +175,7 @@ the object ```{ "path": "/path/to/field" } ``` is a special specs. that we can u
  Below contains all supported functions
 - ####  concat
     - as name suggest this concat the ``values`` with the provided ``seperator`` default separator will be empty char "".
- values can itself we function or specs that resolves to a value.
+ values can itself be function or specs that resolves to a value.
 
 - ####  uppercase
     - uppercase will uppercase the ``value``

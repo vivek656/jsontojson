@@ -73,28 +73,36 @@ Mapper can be like this
    "pathToMap": "/ownerTypes"
   }
  },
- "mappings_complex": [
-  {
-   "operationType": "function",
-   "pathToMap": "/name/full_name",
-   "mapping_spec": {
-    "function_name": "concat",
-    "args": {
-     "values": [
-      {
-       "function_name": "uppercase",
-       "args": {
-        "value": { "path": "/name/fn"}
-       }
-      },
-      { "path": "/name/mn" },
-      { "path": "/name/ln" }
-     ],
-     "separator": " "
+  "mappings_complex": [
+    {
+      "operationType": "function",
+      "pathToMap": "/name/full_name",
+      "mapping_spec": {
+        "function_body": {
+          "function_name": "concat",
+          "args": {
+            "values": [
+              {
+                "function_name": "uppercase",
+                "args": {
+                  "value": {
+                    "path": "/name/fn"
+                  }
+                }
+              },
+              {
+                "path": "/name/mn"
+              },
+              {
+                "path": "/name/ln"
+              }
+            ],
+            "separator": " "
+          }
+        }
+      }
     }
-   }
-  }
- ]
+  ]
 }
 ```
 in this JSON **mappings** contains all the straight forward mappings from input keys to output keys.

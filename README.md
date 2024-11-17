@@ -15,7 +15,7 @@ That's somewhat true, but many advantages of this approach is
 ________________
 
 # How to install
-Library is available to install via maven </br>
+Library is available to install via maven central</br>
 if using maven as build tool , use this in your dependencies
 
 ```xml

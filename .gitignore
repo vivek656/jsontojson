@@ -37,6 +37,8 @@ bin/
 
 ### VS Code ###
 .vscode/
+/gradle.properties
+
 
 ### Mac OS ###
 .DS_Store

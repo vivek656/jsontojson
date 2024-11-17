@@ -20,7 +20,7 @@
     {
       "operationType": "function",
       "pathToMap": "/name/full_name",
-      "mapping_spec": {
+      "mapping_spec": {      
         "function_body": {
           "function_name": "concat",
           "args": {

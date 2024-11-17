@@ -14,6 +14,22 @@ That's somewhat true, but many advantages of this approach is
 
 ________________
 
+# How to install
+Library is available to install via maven </br>
+if using maven as build tool , use this in your dependencies
+
+```xml
+<!-- https://mvnrepository.com/artifact/io.github.vivek656/jsontojson -->
+<dependency>
+    <groupId>io.github.vivek656</groupId>
+    <artifactId>jsontojson</artifactId>
+    <version>0.0.1-dev</version>
+</dependency>
+```
+for gradle, sbt or other build tools see.
+Maven repository link [HERE](https://mvnrepository.com/artifact/io.github.vivek656/jsontojson)
+
+
 # How to construct Mapper
 
 **M**apper.json is the file that you will add that contains mapping information

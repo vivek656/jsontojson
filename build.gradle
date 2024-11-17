@@ -1,9 +1,21 @@
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
     id 'java'
+    id 'maven-publish'
+    id 'signing'
+    id "com.vanniktech.maven.publish" version "0.28.0"
 }
 
-group = 'org.latwal.vivek'
-version = '1.0-SNAPSHOT'
+java {
+    withSourcesJar()
+}
+
+
+group = 'io.github.vivek656'
+version = '0.0.1-dev'
+
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 repositories {
     mavenCentral()
@@ -20,6 +32,52 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
+
+mavenPublishing {
+    coordinates(
+            group as String,
+            name,
+            version as String
+    )
+
+    pom {
+        name = 'jsontojson'
+        description = 'Library to externalize jsonToJson conversion using mapping json'
+        url = 'https://github.com/vivek656/jsontojson'
+
+        licenses {
+            license {
+                name = 'The Apache License, Version 2.0'
+                url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            }
+        }
+        developers {
+            developer {
+                id = 'vivek656'
+                name = 'vivek singh latwal'
+                email = 'viveklatwal656@gmail.com'
+            }
+        }
+        scm {
+            url = "https://github.com/vivek656/jsontojson"
+            connection = "scm:git:https://github.com/vivek656/jsontojson.git"
+            developerConnection = "scm:git:git@github.com:vivek656/jsontojson.git"
+        }
+    }
+
+    // Configure publishing to Maven Central
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+
+    // Enable GPG signing for all publications
+    signAllPublications()
+}
+
+
+
 test {
     useJUnitPlatform()
+}
+
+afterEvaluate {
+    generateMetadataFileForMavenPublication.dependsOn plainJavadocJar
 }
